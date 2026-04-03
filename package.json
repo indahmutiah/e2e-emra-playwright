@@ -1,0 +1,21 @@
+{
+  "name": "e2e-saucedemo-bootcamp",
+  "version": "1.0.0",
+  "description": "e2e for bootcamp sample ",
+  "license": "MIT",
+  "author": "Indah Mutiah MZ",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "show-report": "npx playwright show-report"
+
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.0"
+  }
+}
