@@ -1,4 +1,4 @@
-# e2e-saucedemo-bootcamp
+# e2e-Emra-bootcamp
 
 This is a sample project for e2e testing with sauce labs. Just for learning purpose to understand the automation process. 
 
