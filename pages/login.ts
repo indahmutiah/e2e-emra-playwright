@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test';
 
 export class LoginPage {
     readonly page: Page;
-    readonly username: Locator;
+    readonly email: Locator;
     readonly password: Locator;
     readonly loginButton: Locator;
     readonly welcomeMessage: Locator;
@@ -10,7 +10,7 @@ export class LoginPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.username = page.getByRole('textbox', { name: 'Email' });
+        this.email = page.getByRole('textbox', { name: 'Email' });
         this.password = page.getByRole('textbox', { name: 'Password', exact: true });
         this.loginButton = page.getByRole('button', { name: 'Sign In' });
         this.welcomeMessage = page.getByRole('heading', { name: 'Welcome to Emra! 🎉' });
