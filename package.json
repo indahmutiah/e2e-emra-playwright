@@ -11,15 +11,21 @@
     "test:debug": "npx playwright test --debug",
     "test:headed": "npx playwright test --headed",
     "test:ui": "npx playwright test --ui",
-    "show-report": "npx playwright show-report"
+    "show-report": "npx playwright show-report",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
-    "typescript": "^5.9.3"
+    "globals": "^17.5.0",
+    "jiti": "^2.6.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.58.2"
   },
   "dependencies": {
     "dotenv": "^17.4.1"
