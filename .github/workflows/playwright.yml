@@ -10,6 +10,25 @@ on:
       - completed
 
 jobs:
+  code_analyze:
+    name: 🔍 Code Quality Check (ESLint)
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: false
+
+    outputs:
+      lint_status: ${{ job.status }}
   build_docker:
     name: 🐳 Build Docker Image
     timeout-minutes: 15
