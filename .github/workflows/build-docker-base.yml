@@ -1,0 +1,26 @@
+name: Build Base Docker Image
+
+on:
+  workflow_dispatch: # Hanya jalan secara manual
+
+jobs:
+  build_base:
+    name: 🐳 Build Base Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+      - name: Build and Push Base Image
+        run: |
+          docker build -f Dockerfile -t indahmutiah/my-playwright-autotest .
+          docker push indahmutiah/my-playwright-autotest
