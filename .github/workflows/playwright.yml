@@ -53,7 +53,7 @@ jobs:
       docker_image: playwright-custom:${{ github.sha }}
 
   autotest:
-    name: 🧪 Run Playwright Test
+    name: 🧪 Run Playwright Testing
     runs-on: ubuntu-latest
     needs: build_docker
 
