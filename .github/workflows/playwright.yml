@@ -32,6 +32,7 @@ jobs:
   build_docker:
     name: 🐳 Build Docker Image
     timeout-minutes: 15
+    needs: code_analyze
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.build_custom_docker == 'true' }}
 
