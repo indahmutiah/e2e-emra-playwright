@@ -22,5 +22,5 @@ jobs:
 
       - name: Build and Push Base Image
         run: |
-          docker build -f Dockerfile -t indahmutiah/my-playwright-autotest .
-          docker push indahmutiah/my-playwright-autotest
+          docker build -f Dockerfile -t indahmutiah/my-playwright-autotest:test001 .
+          docker push indahmutiah/my-playwright-autotest:test001
