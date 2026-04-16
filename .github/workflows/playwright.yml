@@ -17,12 +17,14 @@ jobs:
     container:
       image: node:20
     steps:
-        run: echo "Running ESLint to analyze code quality..."
+    - name: Run ESLint info
+      run: echo "Running ESLint to analyze code quality..."
 
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: npm ci
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: npm ci
 
   build_docker:
     name: 🐳 Build Custom Docker Image
