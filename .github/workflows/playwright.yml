@@ -12,21 +12,25 @@ on:
 jobs:
   code_analyze:
     runs-on: ubuntu-latest
-
+    name: 🔍 Code Quality Check (ESLint)
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container:
+      image: node:20
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
   build_docker:
     name: 🐳 Build Custom Docker Image
@@ -71,6 +75,20 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - uses: actions/checkout@v4
     
       - name: Run tests
