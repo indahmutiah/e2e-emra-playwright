@@ -4,27 +4,36 @@ on:
   push:
     branches: [ main, dev ]
   pull_request:
-   workflow_dispatch:
-    inputs:
-      build_custom_docker:
-        required: true
-        default: 'true'
+  workflow_dispatch:
 
 jobs:
+
   build_docker:
     name: 🐳 Build Docker Image
-    timeout-minutes: 15
     runs-on: ubuntu-latest
+
+    outputs:
+      docker_image: ${{ steps.set_output.outputs.image }}
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Build Docker Image
-        run: docker build -t playwright-custom:${{ github.sha }} .
+      - name: Login Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-    outputs:
-      docker_image: playwright-custom:${{ github.sha }}
+      - name: Build Image
+        run: |
+          docker build -t indahmutiah/my-playwright-autotest:test001 .
+
+      - name: Push Image
+        run: |
+          docker push indahmutiah/my-playwright-autotest:test001
+
+      - name: Set Output
+        id: set_output
+        run: echo "image=indahmutiah/my-playwright-autotest:test001" >> $GITHUB_OUTPUT
+
 
   autotest:
     name: 🧪 Run Playwright Testing
@@ -33,6 +42,9 @@ jobs:
 
     container:
       image: ${{ needs.build_docker.outputs.docker_image }}
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     env:
       BASE_URL: ${{ secrets.BASE_URL }}
@@ -43,18 +55,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - uses: actions/checkout@v4
-    
       - name: Run tests
         run: npx playwright test
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
