@@ -27,7 +27,7 @@ jobs:
       run: npm ci
 
   build_docker:
-    name: 🐳 Build Custom Docker Image
+    name: 🐳 Build Docker Image
     timeout-minutes: 15
     runs-on: ubuntu-latest
     needs: code_analyze
