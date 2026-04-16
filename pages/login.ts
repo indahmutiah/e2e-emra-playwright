@@ -2,16 +2,18 @@ import { Locator, Page } from '@playwright/test';
 
 export class LoginPage {
     readonly page: Page;
-    readonly username: Locator;
+    readonly email: Locator;
     readonly password: Locator;
     readonly loginButton: Locator;
+    readonly welcomeMessage: Locator;
     readonly errorMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
-        this.username = page.getByPlaceholder('Username');
-        this.password = page.getByPlaceholder('Password');
-        this.loginButton = page.getByRole('button', { name: 'Login' });
-        this.errorMessage = page.locator('[data-test="error"]');
+        this.email = page.getByRole('textbox', { name: 'Email' });
+        this.password = page.getByRole('textbox', { name: 'Password', exact: true });
+        this.loginButton = page.getByRole('button', { name: 'Sign In' });
+        this.welcomeMessage = page.getByRole('heading', { name: 'Welcome to Emra! 🎉' });
+        this.errorMessage = page.getByText('Invalid credentials');
     }
 }
