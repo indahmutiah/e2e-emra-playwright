@@ -10,19 +10,10 @@ on:
       - completed
 
 jobs:
-  code_analyze:
-    name: 🔍 Code Quality Check (ESLint)
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    steps:
-    - name: Run ESLint info
-      run: echo "Running ESLint to analyze code quality..."
-
   build_docker:
     name: 🐳 Build Docker Image
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    needs: code_analyze
     if: ${{ github.event.inputs.build_custom_docker == 'true' }}
 
     steps:
