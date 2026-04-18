@@ -72,7 +72,6 @@ jobs:
           path: playwright-report/
   
   send-report:
-    send_telegram_report:
     name: 📲 Send Telegram Report
     timeout-minutes: 5
     runs-on: ubuntu-latest
