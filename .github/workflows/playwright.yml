@@ -70,3 +70,9 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
+  
+  send-report:
+    name: 📤 Send Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: autotest
