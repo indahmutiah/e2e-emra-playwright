@@ -1,4 +1,4 @@
-# e2e-Emra-Chat
+# e2e-Emra
 
 This is a sample project for e2e testing with sauce labs. Just for learning purpose to understand the automation process. 
 
